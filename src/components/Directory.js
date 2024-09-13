@@ -1,50 +1,54 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { modifiedToMDY } from "../util/calculator";
 
-export default function Directory() {
-	let dir;
-	let curDir;
-	let fileList = [];
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import FolderIcon from "@mui/icons-material/Folder";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
-	const [folderList, setFolderList] = useState([]);
+export default function Directory(props) {
+	const Folders = props.folderList.map((item, idx) => (
+		<ListItem key={`${item.name + idx}`}>
+			<ListItemAvatar>
+				<Avatar>
+					<FolderIcon />
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText
+				primary={item.name}
+				secondary={modifiedToMDY(item.modified)}
+			/>
+		</ListItem>
+	));
 
-	// useEffect(() => {
-	// 	dir = data.directory;
-	// 	curDir = data.currentDirectory;
-	// 	folderList = data.folderList;
-	// 	fileList = data.fileList;
-	// }, [data]);
-
-	axios({
-		method: "get",
-		url: "https://gist.githubusercontent.com/Astro7145/c7e454dd629dd23ae2b2e71d688e2881/raw/847ffb7d4386dd68b7db0b3743c98572c4a32195/tempserverdirectory.json",
-	})
-		.then((res) => {
-			setFolderList(res.data.folderList);
-		})
-		.catch((err) => {
-			console.error(err);
-		});
-
-	const Folder = folderList.map((item, idx) => (
-		<div key={`${item.name + idx}`}>
-			<b>name: </b>
-			{item.name}
-			<br />
-			<b>modified: </b>
-			{item.type}
-			<br />
-			<b>name: </b>
-			{item.modified}
-			<br />
-			<hr />
-		</div>
+	const Files = props.fileList.map((item, idx) => (
+		<ListItem key={`${item.name + idx}`}>
+			<ListItemAvatar>
+				<Avatar>
+					<InsertDriveFileIcon />
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText
+				primary={`${item.name}.${item.ext}`}
+				secondary={modifiedToMDY(item.modified)}
+			/>
+		</ListItem>
 	));
 
 	return (
-		<div>
-			<hr />
-			{Folder}
-		</div>
+		<List
+			sx={{
+				width: "100%",
+				maxWidth: "auto",
+				bgcolor: "background.paper",
+			}}
+		>
+			{Folders}
+			{Files}
+		</List>
 	);
 }
