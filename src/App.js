@@ -4,6 +4,8 @@ import "./App.css";
 import DirectoryTable from "./components/DirectoryTable";
 import Directory from "./components/Directory";
 import SearchAppBar from "./components/SearchAppBar";
+import Example1 from "./components/Example1";
+import Example2 from "./components/Example2";
 
 function App() {
 	const [data, setData] = useState({
@@ -34,7 +36,9 @@ function App() {
 	return (
 		<div className="App">
 			<SearchAppBar curDir={curDir} dir={dir} />
+			{/* <Directory folderList={folderList} fileList={fileList} /> */}
 			<DirectoryTable folderList={folderList} fileList={fileList} />
+			{/* <Example2 /> */}
 		</div>
 	);
 }
