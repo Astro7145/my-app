@@ -1,24 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
-import DirectoryTable from "./components/DirectoryTable";
-import Directory from "./components/Directory";
 import SearchAppBar from "./components/SearchAppBar";
-import Example1 from "./components/Example1";
-import Example2 from "./components/Example2";
+import Recipt from "./components/Recipt";
 
 function App() {
-	const [data, setData] = useState({
-		directory: "",
-		currentDirectory: "",
-		folderList: [],
-		fileList: [],
-	});
+	const [data, setData] = useState([
+		{
+			id: 0,
+			purchase_date: "",
+			purchase_type: 0,
+			tax: 0,
+			products: [
+				{
+					id: 0,
+					prod_serial: 0,
+					prod_name: "",
+					purchase_date: "",
+					prod_quantity: 0,
+				},
+			],
+			success: false,
+			done: true,
+		},
+	]);
 
 	useEffect(() => {
 		axios({
 			method: "get",
-			url: "https://gist.githubusercontent.com/Astro7145/c7e454dd629dd23ae2b2e71d688e2881/raw/1f0bd1e5d8795a8173fe86cdff54eaf1fc84f861/tempserverdirectory.json",
+			url: "http://localhost:8080/recipt/getReciptList",
 		})
 			.then((res) => {
 				setData(res.data);
@@ -28,17 +38,13 @@ function App() {
 			});
 	}, []);
 
-	const curDir = data.currentDirectory;
-	const dir = data.directory;
-	const folderList = data.folderList;
-	const fileList = data.fileList;
-
 	return (
 		<div className="App">
-			<SearchAppBar curDir={curDir} dir={dir} />
-			{/* <Directory folderList={folderList} fileList={fileList} /> */}
-			<DirectoryTable folderList={folderList} fileList={fileList} />
-			{/* <Example2 /> */}
+			<SearchAppBar
+				title={"주문 목록"}
+				subtitle={"음식을 만들어 주세요!"}
+			/>
+			<Recipt orderList={data} />
 		</div>
 	);
 }

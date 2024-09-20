@@ -70,3 +70,7 @@ export function calculateSize(size) {
 		return size.toFixed(2) + "GB";
 	}
 }
+
+export function addComma(money) {
+	return money !== undefined ? money.toLocaleString("ko-KR") : 0;
+}

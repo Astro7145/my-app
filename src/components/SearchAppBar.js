@@ -74,7 +74,7 @@ export default function SearchAppBar(props) {
 							pr: 2,
 						}}
 					>
-						{props.curDir}
+						{props.title}
 					</Typography>
 					<Typography
 						align="left"
@@ -83,7 +83,7 @@ export default function SearchAppBar(props) {
 							display: { xs: "none", sm: "block" },
 						}}
 					>
-						{props.dir}
+						{props.subtitle}
 					</Typography>
 					<Search>
 						<SearchIconWrapper>
