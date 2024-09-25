@@ -74,3 +74,11 @@ export function calculateSize(size) {
 export function addComma(money) {
 	return money !== undefined ? money.toLocaleString("ko-KR") : 0;
 }
+
+export function sleep(sec) {
+	let start = Date.now(),
+		now = start;
+	while (now - start < sec * 1000) {
+		now = Date.now();
+	}
+}

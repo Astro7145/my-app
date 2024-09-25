@@ -1,5 +1,5 @@
 import * as React from "react";
-import { calculateSize, modifiedToMDY } from "../util/calculator";
+import { calculateSize, modifiedToMDY } from "../src/util/calculator";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
