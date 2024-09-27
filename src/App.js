@@ -12,6 +12,7 @@ function App() {
 		{
 			id: 0,
 			purchase_date: "",
+			table_number: 0,
 			purchase_type: 0,
 			tax: 0,
 			products: [
@@ -29,7 +30,7 @@ function App() {
 	]);
 
 	useEffect(() => {
-		sleep(5);
+		// sleep(10);
 		axios({
 			method: "get",
 			url: "http://localhost:8080/recipt/getReciptList",
