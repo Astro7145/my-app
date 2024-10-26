@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import memberRouter from "./memberRouter";
+import MineSweeper from "../pages/MineSweeper";
 
 const Loading = <div>Loading...</div>;
 const Main = lazy(() => import("../pages/OrderList"));
@@ -32,6 +33,14 @@ const root = createBrowserRouter([
 			</Suspense>
 		),
 		children: memberRouter(),
+	},
+	{
+		path: "minesweeper",
+		element: (
+			<Suspense fallback={Loading}>
+				<MineSweeper />
+			</Suspense>
+		),
 	},
 ]);
 
